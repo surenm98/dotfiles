@@ -1,0 +1,5 @@
+shell fish
+tab_bar_style fade
+tab_fade 1
+tab_bar_align left
+tab_title_max_length 25
