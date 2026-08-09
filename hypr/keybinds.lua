@@ -188,7 +188,7 @@ hl.bind("SUPER" .. " + " .. "A", hl.dsp.exec_cmd("grim -g $(slurp) - |  satty --
 
 -- THE ULTIMATE QUICK SCREENSHOT: Drag to select -> Auto-Saves to file AND Auto-Copies to clipboard
 
-hl.bind("PRINT", hl.dsp.exec_cmd("grim -g $(slurp) - |  tee ~/Pictures/Screenshots/Screenshot-$(date +'%Y-%m-%d-%H%M%S').png| wl-copy"))
+hl.bind("PRINT", hl.dsp.exec_cmd("HYPRSHOT_DIR=$HOME/Pictures/Screenshots hyprshot -m region"))
 
 --"Quick Region Save & Copy"
 
