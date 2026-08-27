@@ -61,14 +61,19 @@ hl.env("ELECTRON_OZONE_PLATFORM_HINT", "wayland")
 
 -- Autostart
 hl.on("hyprland.start", function()
-    hl.exec_cmd("qs -c noctalia-shell")
-    hl.exec_cmd("hyprctl reload &")
+    -- 1. Import Wayland environment variables FIRST
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+    
+    -- 2. Launch Noctalia Shell
+    hl.exec_cmd("qs -c noctalia-shell")
+    
+    -- 3. Launch background services (Removed the broken '&' and '||' operators)
+    hl.exec_cmd("hyprctl reload")
     hl.exec_cmd("wlsunset -l 12.89 -L 80.08 -t 3500 -T 6500")
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
     hl.exec_cmd("wl-paste --type image --watch cliphist store")
-    hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 || /usr/libexec/polkit-gnome-authentication-agent-1")
+    hl.exec_cmd("bash -c '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 || /usr/libexec/polkit-gnome-authentication-agent-1'")
     hl.exec_cmd("gnome-keyring-daemon --start --components=secrets")
-    hl.exec_cmd("hypridle &")
+    hl.exec_cmd("hypridle")
 end)
