@@ -30,6 +30,7 @@ hl.env("XDG_SESSION_TYPE", "wayland")
 
 hl.env("NVD_BACKEND", "direct")
 
+hl.env("AQ_DRM_DEVICES", "/dev/dri/card0:/dev/dri/card1")
 
 
 --QT 
